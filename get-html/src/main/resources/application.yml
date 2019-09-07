@@ -1,0 +1,27 @@
+
+
+rate.limit.permits.per.second: 0.1
+scrapinghub.api.key: 00000000000000000000000000000000
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: url
+          contentType: application/json
+        output:
+          destination: html
+          contentType: application/json
+      kafka:
+        streams:
+          binder:
+            brokers: cp01.woolford.io:9092,cp02.woolford.io:9092,cp03.woolford.io:9092
+            application-id: crawler-17
+            configuration:
+              max:
+                request:
+                  size: 8000000
+              default:
+                  value:
+                    serde: org.springframework.kafka.support.serializer.JsonSerde
