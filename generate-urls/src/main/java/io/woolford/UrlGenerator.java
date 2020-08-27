@@ -5,6 +5,9 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -42,10 +46,25 @@ public class UrlGenerator {
     @Autowired
     KafkaTemplate kafkaTemplate;
 
-    @Scheduled(cron = "0 0 0 * * ?")
+//    @Scheduled(cron = "0 0 0 * * ?")
+    @PostConstruct
     private void generateUrls() throws IOException, URISyntaxException {
 
-        Document doc = Jsoup.connect(digikeySeedUrl.toString()).userAgent(userAgent).get();
+        String html = null;
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--window-size=1920,1200");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--no-sandbox");
+        WebDriver driver = new ChromeDriver(options);
+
+        driver.get(digikeySeedUrl.toString());
+        html = driver.getPageSource();
+        driver.quit();
+
+        Document doc = Jsoup.parse(html);
 
         Elements catfilterlinks = doc.getElementsByClass("catfilterlink");
 

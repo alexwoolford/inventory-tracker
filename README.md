@@ -1,3 +1,3 @@
-# microservice example
+# inventory tracker microservices
 
-TODO: README.md
+![microservices](img/microservices.png)

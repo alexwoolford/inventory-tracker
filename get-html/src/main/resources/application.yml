@@ -1,5 +1,6 @@
 
-
+proxy.enabled: false
+chrome.enabled: true
 rate.limit.permits.per.second: 0.1
 scrapinghub.api.key: 00000000000000000000000000000000
 
