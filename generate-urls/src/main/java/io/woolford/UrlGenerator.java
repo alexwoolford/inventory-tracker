@@ -1,6 +1,5 @@
 package io.woolford;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -46,8 +45,9 @@ public class UrlGenerator {
     @Autowired
     KafkaTemplate kafkaTemplate;
 
-//    @Scheduled(cron = "0 0 0 * * ?")
-    @PostConstruct
+
+//    @PostConstruct
+    @Scheduled(cron = "0 0 0 * * ?")
     private void generateUrls() throws IOException, URISyntaxException {
 
         String html = null;
@@ -66,7 +66,7 @@ public class UrlGenerator {
 
         Document doc = Jsoup.parse(html);
 
-        Elements catfilterlinks = doc.getElementsByClass("catfilterlink");
+        Elements catfilterlinks = doc.getElementsByAttributeValue("data-testid", "subcategories-items");
 
         for (Element element : catfilterlinks) {
 
@@ -98,12 +98,9 @@ public class UrlGenerator {
                 urlRecord.setTimestamp(new Date().getTime());
                 urlRecord.setUrl(url);
 
-                ObjectMapper mapper = new ObjectMapper();
-                String urlRecordJson = mapper.writeValueAsString(urlRecord);
+                kafkaTemplate.send("url", urlRecord);
 
-                kafkaTemplate.send("url", urlRecordJson);
-
-                logger.info(urlRecordJson);
+                logger.info(urlRecord.toString());
 
             }
         }

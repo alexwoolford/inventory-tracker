@@ -34,7 +34,7 @@ public class CalculateDeltas {
 
         final StreamsBuilder builder = new StreamsBuilder();
 
-        // calculates speed based on distance/time of last measurement
+        // calculates changes in inventory on-hand quantity
         KStream<String, String> part = builder.stream("part");
         part.mapValues(value -> {
             value = CalculateDeltas.calculateDeltas(value);
@@ -66,6 +66,8 @@ public class CalculateDeltas {
     }
 
     private static String calculateDeltas(String partRecordString){
+
+        //TODO: use proper Kafka state store
 
         ObjectMapper mapper = new ObjectMapper();
         PartRecord partRecord = new PartRecord();
