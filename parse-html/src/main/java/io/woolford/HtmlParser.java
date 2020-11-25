@@ -34,15 +34,15 @@ public class HtmlParser {
 
         try {
             Document doc = Jsoup.parse(htmlRecord.getHtml());
-            Element productTable = doc.getElementById("productTable").getElementById("lnkPart");
+            Element productTable = doc.getElementsByAttributeValue("class", "MuiTableBody-root").get(0);
             Elements productTableRows = productTable.getElementsByTag("tr");
 
             for (Element productTableRow : productTableRows) {
 
-                String dpn = productTableRow.getElementsByClass("tr-dkPartNumber").text();
-                String mpn = productTableRow.getElementsByClass("tr-mfgPartNumber").text();
-                String mfg = productTableRow.getElementsByClass("tr-vendor").text();
-                String qtyAvailableRaw = productTableRow.getElementsByClass("tr-qtyAvailable").text();
+                String dpn = productTableRow.getElementsByAttributeValue("data-atag", "tr-dkProducts").text();
+                String mpn = productTableRow.getElementsByAttribute("data-product-id").text();
+                String mfg = productTableRow.getElementsByAttributeValue("data-atag", "tr-manufacturer").text();
+                String qtyAvailableRaw = productTableRow.getElementsByAttributeValue("data-atag", "tr-qtyAvailable").text();
                 Integer qoh = qohParser(qtyAvailableRaw);
 
                 PartRecord partRecord = new PartRecord();
@@ -58,7 +58,7 @@ public class HtmlParser {
 
             }
         } catch (Exception e) {
-            logger.error("Unable to parse url " + htmlRecord.getUrl());
+            logger.error("Unable to parse url " + htmlRecord.getUrl() + e.getMessage());
         }
     }
 
