@@ -1,5 +1,25 @@
 # inventory tracker microservices
 
+It's surprising how much we can learn by watching things that change.
+
+Investors, for example, use satellite images that show how full oil storage containers are in order to predict prices. Economists might look at satellite images of Walmart's parking lots, and compare them to previous years, to predict sales numbers before they're announced at the end of the quarter.
+
+Sometimes a change in a measure can be a leading indicator for something else. Increased social media usage combined with a lack of movement, for example, could be a leading indicator for depression.
+
+In supply chain, there's a concept called the 'Bullwhip effect' that shows how information distortion occurs up the supply chain: 
+
+![microservices](img/bullwhip-effect.png)
+
+If Procter and Gamble (P&G) got a notification every time a baby shat in its diaper, they could reduce waste by matching the quantities being produced with demand. As it stands, there are stockpiles of inventory at the customers, the retailers, the suppliers, and the wholesalers, that make the demand seem more "lumpy" and volatile from P&G's perspective.
+
+For the electronic component industry, it's possible to get some visibility into the popularity of components by looking at inventory movements at distributors.
+
+In this (hypothetical?) example, we'll show how we can capture changes on Digikey's website using 4 microservices communicating via Kafka:
+
+[//]: # (TODO: check out social media Netflix doc)
+
+[//]: # (TODO: provide reference showing how social media usage is correlated to depression)
+
 [//]: # (TODO: convert to Avro)
 
 [//]: # (TODO: change diagram to show which services are Spring, Kafka Streams, etc...)
@@ -21,6 +41,8 @@
 [//]: # (TODO: get jobs to create topics - assume that auto-topic-creation is disabled)
 
 ![microservices](img/microservices.png)
+
+It's worth noting that crawling websites may be against the terms of service for the site. I am not a lawyer. You should seek legal advice before doing this sort of thing. This is a _hypothetical_ example of how someone might track inventory changes to figure out what's being sold.
 
 ## generate URL's
 
