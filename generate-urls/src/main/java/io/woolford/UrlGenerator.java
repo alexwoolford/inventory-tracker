@@ -17,7 +17,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -46,7 +45,6 @@ public class UrlGenerator {
     KafkaTemplate kafkaTemplate;
 
 
-//    @PostConstruct
     @Scheduled(cron = "0 0 0 * * ?")
     private void generateUrls() throws IOException, URISyntaxException {
 

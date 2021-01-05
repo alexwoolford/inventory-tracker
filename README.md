@@ -4,7 +4,7 @@ It's surprising how much we can learn by watching things that change.
 
 Investors, for example, use satellite images that show how full oil storage containers are in order to predict prices. Economists might look at satellite images of Walmart's parking lots, and compare them to previous years, to predict sales numbers before they're announced at the end of the quarter.
 
-Sometimes a change in a measure can be a leading indicator for something else. Increased social media usage combined with a lack of movement, for example, could be a leading indicator for depression.
+Increased social media usage late at night, for example, is an indicator of depression (see [Predicting Depression via Social Media](http://course.duruofei.com/wp-content/uploads/2015/05/Choudhury_Predicting-Depression-via-Social-Media_ICWSM13.pdf)).
 
 In supply chain, there's a concept called the 'Bullwhip effect' that shows how information distortion occurs up the supply chain: 
 
@@ -15,10 +15,6 @@ If Procter and Gamble (P&G) got a notification every time a baby shat in its dia
 For the electronic component industry, it's possible to get some visibility into the popularity of components by looking at inventory movements at distributors.
 
 In this (hypothetical?) example, we'll show how we can capture changes on Digikey's website using 4 microservices communicating via Kafka:
-
-[//]: # (TODO: check out social media Netflix doc)
-
-[//]: # (TODO: provide reference showing how social media usage is correlated to depression)
 
 [//]: # (TODO: convert to Avro)
 
